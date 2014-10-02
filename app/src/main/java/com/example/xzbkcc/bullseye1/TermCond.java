@@ -1,20 +1,17 @@
 package com.example.xzbkcc.bullseye1;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 
 public class TermCond extends Activity {
     public static final String MyPreferences = "MyPrefs";
-    public static final Boolean FirstTime = true;
-    public static final String indFirst = "indFirstKey";
+    public static final String indFirst = "";
 
     SharedPreferences sharedPreferencesVal;
 
@@ -23,7 +20,7 @@ public class TermCond extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_cond);
 
-        sharedPreferencesVal = getSharedPreferences(MyPreferences, Context.MODE_PRIVATE);
+        sharedPreferencesVal = getSharedPreferences(MyPreferences, 0);
 
         if (sharedPreferencesVal.contains(indFirst))
         {
@@ -35,8 +32,10 @@ public class TermCond extends Activity {
 
     public void onClickAgree(View view)
     {
+        sharedPreferencesVal = getSharedPreferences(MyPreferences, 0);
         SharedPreferences.Editor editor = sharedPreferencesVal.edit();
-        editor.putBoolean(indFirst, FirstTime);
+        editor.putBoolean(indFirst, true);
+        editor.commit();
 
         Intent verifyPhoneNo = new Intent(getApplicationContext(), RegisterPhoneNo.class);
         verifyPhoneNo.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
