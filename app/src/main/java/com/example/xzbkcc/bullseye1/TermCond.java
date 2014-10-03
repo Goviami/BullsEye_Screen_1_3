@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
 import org.w3c.dom.Text;
 
 
@@ -27,7 +26,8 @@ public class TermCond extends Activity {
         TextView termCondUrl =  (TextView)findViewById(R.id.termCondVar);
         sharedPreferencesVal = getSharedPreferences(MyPreferences, 0);
 
-        termCondUrl.setOnClickListener(new View.OnClickListener() {
+        //This part is used to display the terms and condition from website.
+        termCondUrl.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View V){
                 Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
@@ -42,11 +42,14 @@ public class TermCond extends Activity {
         }
     }
 
+    //This function will take us to next linked activity - RegisterPhoneNo
+    //based on the button click "Agree".
     public void onClickAgree(View view)
     {
         sharedPreferencesVal = getSharedPreferences(MyPreferences, 0);
         SharedPreferences.Editor editor = sharedPreferencesVal.edit();
         editor.putBoolean(indFirst, true);
+        //Commit is necessary to store the shared preference setting.
         editor.commit();
 
         Intent verifyPhoneNo = new Intent(getApplicationContext(), RegisterPhoneNo.class);
