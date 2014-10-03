@@ -46,7 +46,9 @@ public class RegisterPhoneNo extends Activity implements AdapterView.OnItemSelec
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View V){
-                Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+                Intent webLogin = new Intent(getApplicationContext(), WebLogin.class);
+                webLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(webLogin);
             }
         });
     }
