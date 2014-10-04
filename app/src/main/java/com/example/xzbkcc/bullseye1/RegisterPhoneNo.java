@@ -3,6 +3,7 @@ package com.example.xzbkcc.bullseye1;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,11 +49,47 @@ public class RegisterPhoneNo extends Activity implements AdapterView.OnItemSelec
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View V){
-                Intent webLogin = new Intent(getApplicationContext(), WebLogin.class);
-                webLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(webLogin);
+                if (validatePhoneEmail()) {
+                    Intent webLogin = new Intent(getApplicationContext(), WebLogin.class);
+                    webLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(webLogin);
+                }
             }
         });
+    }
+
+    public boolean validatePhoneEmail()
+    {
+        editTextPhoneNumber.setError(null);
+        editTextEmailId.setError(null);
+
+        String phoneNo = editTextPhoneNumber.getText().toString();
+        String emailID = editTextEmailId.getText().toString();
+
+        if (!TextUtils.isEmpty(phoneNo) && !isPhoneNoValid(phoneNo))
+        {
+            editTextPhoneNumber.setError("Please Enter a valid number");
+            return false;
+        }
+
+        if (TextUtils.isEmpty(phoneNo))
+        {
+            editTextPhoneNumber.setError("This field is required");
+            return false;
+        }
+
+        if (TextUtils.isEmpty(emailID))
+        {
+            editTextEmailId.setError("This field is required");
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean isPhoneNoValid(String mPhoneNo)
+    {
+        return mPhoneNo.length() > 9;
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int position,
