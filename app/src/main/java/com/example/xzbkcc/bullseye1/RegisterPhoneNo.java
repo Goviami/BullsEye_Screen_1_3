@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 public class RegisterPhoneNo extends Activity implements AdapterView.OnItemSelectedListener {
     Spinner spinnerCountryList;
+    EditText editCountry;
     EditText editTextPhoneNumber;
     EditText editTextEmailId;
     Button nextButton;
@@ -28,6 +29,7 @@ public class RegisterPhoneNo extends Activity implements AdapterView.OnItemSelec
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_phone_no);
 
+        editCountry =(EditText)findViewById(R.id.countryId);
         editTextPhoneNumber = (EditText)findViewById(R.id.phoneNumber);
         editTextEmailId = (EditText)findViewById(R.id.emailId);
         spinnerCountryList = (Spinner)findViewById(R.id.spinnerCountry);
@@ -57,7 +59,7 @@ public class RegisterPhoneNo extends Activity implements AdapterView.OnItemSelec
                                long id) {
         spinnerCountryList.setSelection(position);
         String selCountry = (String) spinnerCountryList.getSelectedItem();
-        editTextPhoneNumber.setText("Selected Android OS:" + selCountry);
+        editCountry.setText(selCountry);
     }
 
     @Override
