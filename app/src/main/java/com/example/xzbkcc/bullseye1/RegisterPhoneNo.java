@@ -17,9 +17,7 @@ import android.widget.TextView;
 
 public class RegisterPhoneNo extends Activity implements AdapterView.OnItemSelectedListener {
     Spinner spinnerCountryList;
-    EditText editCountry;
     EditText editTextPhoneNumber;
-    EditText editTextEmailId;
     Button nextButton;
     private String[] country = { "United States", "India", "United Kingdom", "Brazil",
             "Mexico", "Australia", "Japan", "China",
@@ -30,9 +28,7 @@ public class RegisterPhoneNo extends Activity implements AdapterView.OnItemSelec
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_phone_no);
 
-        editCountry =(EditText)findViewById(R.id.countryId);
         editTextPhoneNumber = (EditText)findViewById(R.id.phoneNumber);
-        editTextEmailId = (EditText)findViewById(R.id.emailId);
         spinnerCountryList = (Spinner)findViewById(R.id.spinnerCountry);
 
         ArrayAdapter<String> adapter_country = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, country);
@@ -42,7 +38,6 @@ public class RegisterPhoneNo extends Activity implements AdapterView.OnItemSelec
         spinnerCountryList.setOnItemSelectedListener(this);
 
         editTextPhoneNumber = (EditText)findViewById(R.id.phoneNumber);
-        editTextEmailId = (EditText)findViewById(R.id.emailId);
         nextButton =(Button)findViewById(R.id.buttonNext);
 
         //This part is used to display the terms and condition from website.
@@ -61,14 +56,12 @@ public class RegisterPhoneNo extends Activity implements AdapterView.OnItemSelec
     public boolean validatePhoneEmail()
     {
         editTextPhoneNumber.setError(null);
-        editTextEmailId.setError(null);
 
         String phoneNo = editTextPhoneNumber.getText().toString();
-        String emailID = editTextEmailId.getText().toString();
 
         if (!TextUtils.isEmpty(phoneNo) && !isPhoneNoValid(phoneNo))
         {
-            editTextPhoneNumber.setError("Please Enter a valid number");
+            editTextPhoneNumber.setError("Please Enter a valid phone number");
             return false;
         }
 
@@ -78,25 +71,18 @@ public class RegisterPhoneNo extends Activity implements AdapterView.OnItemSelec
             return false;
         }
 
-        if (TextUtils.isEmpty(emailID))
-        {
-            editTextEmailId.setError("This field is required");
-            return false;
-        }
-
         return true;
     }
 
     public boolean isPhoneNoValid(String mPhoneNo)
     {
-        return mPhoneNo.length() > 9;
+        return mPhoneNo.length() == 10;
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int position,
                                long id) {
         spinnerCountryList.setSelection(position);
         String selCountry = (String) spinnerCountryList.getSelectedItem();
-        editCountry.setText(selCountry);
     }
 
     @Override

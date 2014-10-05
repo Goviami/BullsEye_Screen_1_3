@@ -16,7 +16,10 @@
         android:layout_marginTop="85dp"
         android:text="@string/Term_Cond"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:autoLink="web"
+        android:focusable="false"
+        android:focusableInTouchMode="true" />
 
     <Button
         android:layout_width="wrap_content"
