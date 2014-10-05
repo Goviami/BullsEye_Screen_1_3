@@ -45,7 +45,7 @@ public class RegisterPhoneNo extends Activity implements AdapterView.OnItemSelec
             @Override
             public void onClick(View V){
                 if (validatePhoneEmail()) {
-                    Intent webLogin = new Intent(getApplicationContext(), WebLogin.class);
+                    Intent webLogin = new Intent(getApplicationContext(), ProfileInfo.class);
                     webLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(webLogin);
                 }
